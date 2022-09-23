@@ -1,7 +1,17 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {FormControl} from "@angular/forms";
 import {Subject} from "rxjs";
-import {debounceTime, filter, map, switchMap, takeUntil, tap} from "rxjs/operators";
+import {
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  map,
+  startWith,
+  switchMap,
+  take,
+  takeUntil,
+  tap
+} from "rxjs/operators";
 import {MockDataService} from "../services/mock-data.service";
 import {CarsData} from "../interfaces/cars-data";
 
@@ -22,9 +32,8 @@ export class SearchComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.searchCarControl.valueChanges
       .pipe(
-        tap(() => this.carsArray = []),
+        startWith(''),
         debounceTime(500),
-        filter(searchValue => searchValue !== ''),
         switchMap(searchValue => {
           this.searchValue = searchValue;
 
