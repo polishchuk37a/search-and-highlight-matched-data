@@ -2,7 +2,7 @@
   <input type="text" class="car-input" placeholder="Search car..." [formControl]="searchCarControl">
   <div class="dropdown" >
     <div class="car" *ngFor="let car of carsArray">
-      <p class="car-name" highlightLetters [searchedValue]="searchValue" [carName]="car.name">{{car.name}}</p>
+      <p class="car-name" highlightLetters [searchedValue]="searchCarControl.value" [carName]="car.name">{{car.name}}</p>
     </div>
   </div>
 </div>
